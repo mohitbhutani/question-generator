@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Paper</title>
+    <style>
+        table.center {
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <table class="center">
+        <tr>
+            <td style="text-align: center;text-decoration: underline;font-weight:bold;" th:text="${questionPaper.examHeading}"></td>
+        </tr>
+    </table>
+    <br/>
+    <table class="center">
+        <tr>
+            <td th:text="${questionPaper.code}" style="text-align: center;text-decoration: underline;font-weight:bold;"></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <table class="center" style="border-bottom:solid; border-top:solid; font-weight: bold">
+        <tr>
+            <td th:inline="text">TIME: [[${questionPaper.duration}]]</td>
+            <td th:inline="text">DATE: _________</td>
+            <td th:inline="text">TOTAL: [[${questionPaper.totalMarks}]]</td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <table class="center">
+        <tr>
+            <td style="text-align: center;" th:inline="text"><strong>ARMY NO_________________________</strong></td>
+            <td style="text-align: center;" th:inline="text"><strong>RANK____________________________</strong></td>
+            <td style="text-align: center;" th:inline="text"><strong>NAME____________________________</strong></td>
+            <td style="text-align: center;" th:inline="text"><strong>PL______________________________</strong></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <table class="center" style="border-spacing: 0 2em;">
+        <tr th:each = "maqs,iter: ${questionPaper.modulesAndQuestions}">
+
+            <td th:text="${iter.index+1} + '.'" style="width: 3%; vertical-align: top; text-align: center;font-weight:bold;"></td>
+            <td>
+                <b><span th:text="${maqs.key}" style="text-decoration: underline;"></span></b>
+                <table class="center" style="border-spacing: 0 1em;">
+                    <tbody>
+                        <tr th:each="question,rowStat : ${maqs.value}">
+                            <td th:text="${rowStat.index+1} + '.'" style="width: 3%; vertical-align: top; text-align: center"></td>
+                            <td th:text="${question.questionText}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <br/><br/>
+    </table>
+
+
+</body>
+</html>

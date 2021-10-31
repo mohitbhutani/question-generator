@@ -27,7 +27,7 @@ public class CreateQuestionPaper {
                         int questionsToPick = Math.toIntExact(Math.round((examDTO.getQuestionPerModule() * percent) / 100.0));
                         List<Question> validQList = questionPerLevel.get(level);
                         Random rand = new Random();
-                        //Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive)
+                        //Returns a pseudorandom, unselectedQuestions = {LinkedHashMap@7941}  size = 2iformly distributed int value between 0 (inclusive) and the specified value (exclusive)
                         rand.ints(0,validQList.size()).limit(questionsToPick)
                                 .forEach(randomIndex -> selectedQuestions.get(module).add(validQList.get(randomIndex)));
                     });
@@ -35,10 +35,12 @@ public class CreateQuestionPaper {
             });
             questionPaper.setId(1L);
             questionPaper.setDuration(examDTO.getDuration());
-            questionPaper.setSubject(subject);
+            questionPaper.setSubject(examDTO.getFormalSubjectName());
             questionPaper.setCode(examDTO.getExamCode());
             questionPaper.setRules(examDTO.getInstructionSet());
             questionPaper.setModulesAndQuestions(selectedQuestions);
+            questionPaper.setExamHeading(examDTO.getExamHeading());
+            questionPaper.setTotalMarks(examDTO.getTotalMarks());
         }
 
         return questionPaper;

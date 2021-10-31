@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Paper Generator</title>
+    <style>
+        table.center {
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h3>Welcome, Enter The Exam details</h3>
+<form action="#" th:action="@{/createPaperForRecruit}" method="post" th:object="${examDto}">
+    <table class="center">
+        <tbody>
+        <tr>
+<td>    <label>Exam type:</label></td>
+<td>    <select th:field="*{examType}">
+        <option th:each="p : ${typeOfExams}" th:value="${p}" th:text="${p}" />
+    </select></td>
+        </tr>
+<br/>
+        <tr>
+<td>    <label>Subject:</label></td>
+<td>   <select th:field="*{subject}">
+        <option th:each="p : ${subjects}" th:value="${p}" th:text="${p}" />
+    </select></td>
+        </tr>
+    <br/>
+        <tr>
+    <td><label>Name of subject to be printed on Paper:</label></td>
+    <td><input type="text" th:field="*{formalSubjectName}" /></td><br/>
+        </tr>
+        <tr>
+    <td><label>Exam Heading (eg: CHIEF INSTRUCTOR COMBAT ENGINEERING):</label></td>
+    <td><input type="text" th:field="*{examHeading}" /></td><br/>
+        </tr>
+        <tr>
+    <td><label>Questions per module:</label></td>
+    <td><input type="number" th:field="*{questionPerModule}" /></td>
+        </tr>
+        <tr>
+    <td><label>Exam Code:</label></td>
+    <td><input type="text" th:field="*{examCode}" /></td>
+        </tr>
+        <tr>
+    <td><label>Duration:</label></td>
+    <td><input type="text" th:field="*{duration}" /></td>
+        </tr>
+        <tr>
+    <td><label>Total Marks:</label></td>
+    <td><input type="text" th:field="*{totalMarks}" /></td>
+        </tr>
+        <tr>
+    <td><label>Set of Instructions:</label></td>
+    <td><textarea th:field="*{instructionSet}" rows="2" cols="20"></textarea></td>
+        </tr>
+        <tr>
+    <td><label>Question Paper Type:</label></td>
+    <td><select th:field="*{questionPaperType}">
+        <option th:each="p : ${typeOfPapers}" th:value="${p}" th:text="${p}" />
+    </select></td>
+        </tr>
+        <tr>
+            <td></td><td><button type="submit">Register</button></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

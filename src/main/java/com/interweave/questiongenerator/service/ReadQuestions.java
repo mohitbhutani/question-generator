@@ -2,15 +2,15 @@ package com.interweave.questiongenerator.service;
 
 import com.interweave.questiongenerator.domain.Question;
 import com.interweave.questiongenerator.domain.QuestionDifficulty;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -32,8 +32,8 @@ public class ReadQuestions {
                     .filter(Files::isRegularFile)
                     .filter(p -> p.getFileName().toString().endsWith("xls") || p.getFileName().toString().endsWith("xlsx") || p.getFileName().toString().endsWith("xltx"))
                     .forEach(p -> {
-                        try(Workbook workbook = new XSSFWorkbook(p.toFile())){
-                            String subject = filePath.getName();
+                        try(Workbook workbook = WorkbookFactory.create(Files.newInputStream(p))){
+                            String subject = p.getFileName().toString().substring(0, p.getFileName().toString().indexOf("."));
                             if(!subjectsAndModules.containsKey(subject)) subjectsAndModules.put(subject, new LinkedHashSet<>());
                             if(!questionsPerSubject.containsKey(subject)) questionsPerSubject.put(subject, new LinkedHashMap<>());
                             for(Sheet sheet : workbook) {
@@ -62,10 +62,12 @@ public class ReadQuestions {
                                         Long id = (long)row.getCell(0).getNumericCellValue();
                                         String question = row.getCell(1).getRichStringCellValue().getString();
                                         String level = String.valueOf(row.getCell(2).getRichStringCellValue().getString());
+                                        Question q = new Question(id, question, QuestionDifficulty.getByName(level), module, subject);
                                         if(questionPerLevel.containsKey(level)) {
-                                            questionPerLevel.get(level).add(new Question(id, question, QuestionDifficulty.valueOf(level), module, subject));
+                                            questionPerLevel.get(level).add(q);
                                         } else {
-                                            questionPerLevel.put(level, new ArrayList<>());
+                                            List<Question> ql = new ArrayList<>(20);ql.add(q);
+                                            questionPerLevel.put(level, ql);
                                         }
                                     }
                                     if(breakCond) {

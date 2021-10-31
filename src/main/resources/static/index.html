@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p>Welcome, Lets create your exam papers</p>
+<br/>
+<form action="/loadQuestions"  method="post">
+
+  <label>Directory to read questions from (folder where all excel files are located):</label>
+  <input type="text" name="dir" /><br/>
+  <br/>
+  <button type="submit">Load Questions</button>
+</form>
+
+</body>
+</html>

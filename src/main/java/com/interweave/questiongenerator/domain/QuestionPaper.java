@@ -13,17 +13,40 @@ public class QuestionPaper {
     private String code;
     private String duration;
     private Set<String> rules;
+    private String examHeading;
+    private String totalMarks;
+
 
     public QuestionPaper() {
     }
 
-    public QuestionPaper(Long id, String subject, LinkedHashMap<String, List<Question>> modulesAndQuestions, String code, String duration, Set<String> rules) {
+    public QuestionPaper(Long id, String subject, LinkedHashMap<String, List<Question>> modulesAndQuestions, String code, String duration, Set<String> rules, String examHeading, String totalMarks) {
         this.id = id;
         this.subject = subject;
         this.modulesAndQuestions = modulesAndQuestions;
         this.code = code;
         this.duration = duration;
         this.rules = rules;
+        this.examHeading = examHeading;
+        this.totalMarks = totalMarks;
+    }
+
+    public String getExamHeading() {
+        return examHeading;
+    }
+
+    public QuestionPaper setExamHeading(String examHeading) {
+        this.examHeading = examHeading;
+        return this;
+    }
+
+    public String getTotalMarks() {
+        return totalMarks;
+    }
+
+    public QuestionPaper setTotalMarks(String totalMarks) {
+        this.totalMarks = totalMarks;
+        return this;
     }
 
     public Long getId() {

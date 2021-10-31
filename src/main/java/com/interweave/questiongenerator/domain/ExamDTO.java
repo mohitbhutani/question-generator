@@ -14,8 +14,11 @@ public class ExamDTO {
     private Set<String> instructionSet;
     private QuestionPaperType questionPaperType;
     private List<ModuleLevel> moduleLevels;
+    private String formalSubjectName;
+    private String examHeading;
+    private String totalMarks;
 
-    public ExamDTO(ExamType examType, String subject, Integer questionPerModule, String examCode, String duration, Set<String> instructionSet, QuestionPaperType questionPaperType, List<ModuleLevel> moduleLevels) {
+    public ExamDTO(ExamType examType, String subject, Integer questionPerModule, String examCode, String duration, Set<String> instructionSet, QuestionPaperType questionPaperType, List<ModuleLevel> moduleLevels, String formalSubjectName, String examHeading, String totalMarks) {
         this.examType = examType;
         this.subject = subject;
         this.questionPerModule = questionPerModule;
@@ -24,6 +27,36 @@ public class ExamDTO {
         this.instructionSet = instructionSet;
         this.questionPaperType = questionPaperType;
         this.moduleLevels = moduleLevels;
+        this.formalSubjectName = formalSubjectName;
+        this.examHeading = examHeading;
+        this.totalMarks = totalMarks;
+    }
+
+    public String getFormalSubjectName() {
+        return formalSubjectName;
+    }
+
+    public ExamDTO setFormalSubjectName(String formalSubjectName) {
+        this.formalSubjectName = formalSubjectName;
+        return this;
+    }
+
+    public String getExamHeading() {
+        return examHeading;
+    }
+
+    public ExamDTO setExamHeading(String examHeading) {
+        this.examHeading = examHeading;
+        return this;
+    }
+
+    public String getTotalMarks() {
+        return totalMarks;
+    }
+
+    public ExamDTO setTotalMarks(String totalMarks) {
+        this.totalMarks = totalMarks;
+        return this;
     }
 
     public Set<String> getInstructionSet() {
